@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+    {{ publishCss() }}
+
+    {{ publish('/Layouts/assets') }}
+
+    <link rel="stylesheet" href="{{ asset('/Layouts/assets/mystyle.css') }}">
+    <link rel="shortcut icon" href="{{ asset('/Layouts/assets/favicon.ico') }}">
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img class="logo" src="{{ asset('/Layouts/assets/logo.png') }}"/></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/admin/category">Категории</a></li>
+                <li><a href="/admin/news">Новости</a></li>
+            </ul>
+            {% spaceless %}
+            <ul class="nav navbar-nav navbar-right">
+                {% if app.user %}
+                <li><p>Добро пожаловать, <strong>{{ app.user.firstName }}</strong>! &nbsp; <a href="/user/logout.html">Выход</a></p></li>
+                {% else %}
+                <li><a href="/user/register.html">Регистрация</a></li>
+                <li><a href="/user/login.html">Вход</a></li>
+                {% endif %}
+            </ul>
+            {% endspaceless %}
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+
+    {% block content %}{% endblock %}
+
+</div>
+{{ publishJs() }}
+</body>
+</html>
