@@ -1,0 +1,10 @@
+{% block content %}
+
+<h1>Категории</h1>
+
+<div class="list-group">
+    {% for cat in cats %}
+        <a href="/category/news?id={{cat.pk}}" class="list-group-item">{{cat.title}}</a>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'Index.html' %}
+{% block top_title %}Новости категории "{{cats.maincat.title}}"{% endblock %}
+{% block content %}
+
+<h1>Новости категории "{{cats.maincat.title}}"</h1>
+<br>
+{% if (cats.maincat.news or cats[0].news) | length %}
+
+<table class="table table-striped">
+    {% if not cats.maincat.news is empty %}
+    <tr>
+        <th width="70%" class="lead">{{cats.maincat.title}}</th><th>Дата публикации</th>
+    </tr>
+    {% for article in cats.maincat.news %}
+    <tr>
+        <td><a href="/news/one?id={{article.pk}}">{{article.title}}</a></td>
+        <td>{{article.pubday}}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% for cat in cats %}
+    {% if cat.news | length %}
+    <tr>
+        <th width="70%" class="lead">{{cat.title}}</th><th>Дата публикации</th>
+    </tr>
+
+    {% for article in cat.news %}
+    <tr>
+        <td><a href="/news/one?id={{article.pk}}">{{article.title}}</a></td>
+        <td>{{article.pubday}}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+</table>
+{% endif %}
+{% if (cats.maincat.news and cats[0].news) is empty %}
+<p>В категории {{cats.maincat.title}} пока нет товаров</p>
+{% endif %}
+<a href="/category">К категориям</a>
+{% endblock %}

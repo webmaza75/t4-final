@@ -1,0 +1,13 @@
+{% extends 'Index.html' %}
+{% block top_title %}Все категории{% endblock %}
+{% block content %}
+<h1>Категории</h1>
+    <table class="table table-striped">
+        {% for cat in cats %}
+        <tr>
+            <td>{{cat.title}}</td>
+            <td><a class="btn btn-success btn-sm" href="/category/news?id={{cat.pk}}">Показать</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
