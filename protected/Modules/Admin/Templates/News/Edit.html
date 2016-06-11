@@ -1,0 +1,52 @@
+{% extends 'Page.html' %}
+{% block top_title %}Добавление/Редактирование новости{% endblock %}
+{% block content %}
+
+{% if errors %}
+{% for error in errors %}
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Ошибка:</strong> {{ error.message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<h1>Добавление/Редактирование новости</h1>
+
+<div class="container">
+    <form method="post" action="/admin/news/edit">
+        <div class="form-group">
+            <label for="title">Заголовок новости</label>
+            <input type="text" class="form-control" id="title" name="news[title]" value="{{news.title}}" placeholder="Заголовок новости">
+        </div>
+        <div class="form-group">
+            <label for="pubday">Дата публикации</label>
+            <input type="date" class="form-control" id="pubday" value="{{news.pubday}}" name="news[pubday]">
+        </div>
+        <div class="form-group">
+            <label for="categories">Выберите категорию товара</label>
+            <select id="categories" name="news[category]">
+                {% for cat in cats %}
+                {% if news.__category_id == cat.pk %}
+                <option value="{{cat.__id}}" selected>{{cat.title}}</option>
+                {% else %}
+                <option value="{{cat.__id}}">{{cat.title}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="text">Содержание новости</label>
+            <textarea class="form-control" id="text" name="news[text]" placeholder="Содержание новости" required>{{news.text}}</textarea>
+        </div>
+
+        {% if news.pk %}
+        <input type="hidden" name="news[id]" value="{{news.pk}}">
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<br><br>
+<a href="/admin/news">К списку новостей</a>
+{% endblock %}

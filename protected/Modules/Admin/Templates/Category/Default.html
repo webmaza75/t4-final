@@ -1,0 +1,20 @@
+{% extends 'Page.html' %}
+{% block top_title %}Категории{% endblock %}
+{% block content %}
+<h1>Все категории</h1>
+<br>
+    <a href="/admin/category/edit" class="btn btn-sm btn-success">Добавить</a>
+    <p></p>
+    <table class="table table-striped">
+        <tr>
+            <th width="70%">Категория</th><th>Действия</th>
+        </tr>
+        {% for cat in cats %}
+            <tr>
+                <td><a href="/admin/category/edit?id={{cat.Pk}}">{% if cat.__lvl == 0 %}{{cat.title}}{% elseif cat.__lvl == 1 %}- {{cat.title}}{% elseif cat.__lvl == 2 %}-- {{cat.title}}{% else %}--- {{cat.title}}{% endif %}</a></td>
+                <td><a class="btn btn-danger btn-sm" href="/admin/category/delete?id={{cat.Pk}}">Удалить</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
