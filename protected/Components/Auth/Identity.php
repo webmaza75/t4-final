@@ -6,6 +6,12 @@ use App\Models\User;
 use App\Models\UserSession;
 use T4\Http\Helpers;
 
+/**
+ * Class Identity
+ * Идентификация пользователей
+ *
+ * @package App\Components\Auth
+ */
 class Identity
 {
     public function login($data)
@@ -63,7 +69,6 @@ class Identity
                 }
             }
         }
-        //return User::findByPK(1);
         return null;
     }
 
