@@ -1,0 +1,31 @@
+{% extends 'Index.html' %}
+
+{% if article.title is empty  %}
+{% set artTitle = 'Без названия' %}
+{% else %}
+{% set artTitle = article.title %}
+{% endif %}
+
+{% if article.pubday is empty  %}
+{% set pubDate = 'не опубликована' %}
+{% else %}
+{% set pubDate = article.pubday %}
+{% endif %}
+
+
+{% block top_title %}{{artTitle}}{% endblock %}
+
+{% block content %}
+
+<h1>{{artTitle}}</h1>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{category.title}} | {{pubDate}}</h3>
+    </div>
+    <div class="panel-body">
+        <div>{{article.text}}</div>
+    </div>
+</div>
+
+{% endblock %}
