@@ -1,0 +1,29 @@
+{% block content %}
+<h1>Последняя новость</h1>
+
+{% if article.title is empty  %}
+    {% set artTitle = 'Без названия' %}
+{% else %}
+    {% set artTitle = article.title %}
+{% endif %}
+
+{% if article.pubday is empty  %}
+    {% set pubDay = 'Не опубликована' %}
+{% else %}
+    {% set pubDay = article.pubday %}
+{% endif %}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a href="/news/one?id={{article.pk}}">{{artTitle}}</a>
+        </h3>
+    </div>
+
+    <div class="panel-body">Дата публикации: {{pubDay}}
+        <hr>
+        {{ article.text }}
+    </div>
+</div>
+
+{% endblock %}
