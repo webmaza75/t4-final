@@ -20,7 +20,7 @@ class Category extends Controller
      */
     protected function access($action, $params = [])
     {
-        return (!empty($this->app->user) && ($this->app->user->email == 'admin@t4.final'));
+        return (!empty($this->app->user) && (1 == $this->app->user->__id));
     }
 
     public function actionDefault()
